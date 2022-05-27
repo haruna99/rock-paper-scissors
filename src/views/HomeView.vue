@@ -1,18 +1,40 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <div class="home-content">
+      <Game v-if="gameOn" />
+      <GamePlayed v-else/>
+      <GameModal />
+    </div>
+    <RulesBtn />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '@/components/Header.vue'
+import Game from '@/components/Game.vue'
+import GameModal from '@/components/Modal.vue'
+import RulesBtn from '@/components/RulesBtn.vue'
+import { mapGetters } from 'vuex'
+import GamePlayed from '@/components/GamePlayed.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    Header,
+    Game,
+    GameModal,
+    RulesBtn,
+    GamePlayed
+  },
+  computed: {
+    ...mapGetters(['gameOn'])
   }
 }
 </script>
+
+<style lang="scss">
+  .home {
+    position: relative;
+  }
+</style>
